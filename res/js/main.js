@@ -7,6 +7,8 @@ class Player {
         this.h = h;
         this.c = c;
         this.v = v;
+        this.basicV = v;
+        this.maxV = v * 2;
     }
 
     draw(ctx) {
@@ -19,10 +21,20 @@ class Player {
         if (keys["s"]) this.y += this.v;
         if (keys["a"]) this.x -= this.v;
         if (keys["d"]) this.x += this.v;
+        if (keys[" "]) {
+            this.w -= 2;
+            this.h -= 2;
+        } 
+        if (keys["k"]) {
+            this.v = this.maxV;
+        } else {
+            this.v = this.basicV;
+        }
+
     }
 
 }
-const myPlayer = new Player(10, 10, 50, 50, "black", 5);
+const myPlayer = new Player(10, 10, 50, 50, "green", 5);
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
