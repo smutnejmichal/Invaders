@@ -52,12 +52,30 @@ let keys = {};
 window.addEventListener("keydown", (e) => keys[e.key] = true);
 window.addEventListener("keyup", (e) => keys[e.key] = false);
 
+const testObject = {
+    w: 100,
+    h: 100,
+    x: 200,
+    y: 300,
+    c: "blue"
+}
+
 const gameLoop = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     myPlayer.update(keys);
 
     myPlayer.draw(ctx);
+    ctx.fillStyle = testObject.c;
+    ctx.fillRect(testObject.x, testObject.y, testObject.w, testObject.h);
+    checkCollision(myPlayer, testObject);
     requestAnimationFrame(gameLoop);
 };
 
 requestAnimationFrame(gameLoop);
+
+const checkCollision = (object1, object2) => {
+    if ((object1.x + object1.w > object2.x) && (object2.y + object2.h > object1.y) && (object2.x + object2.w > object1.x) && (object1.y + object1.h > object2.y)) {
+        return object2.c = "red";
+    }
+    else object2.c = "blue";
+};
