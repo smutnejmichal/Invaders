@@ -17,10 +17,10 @@ class Player {
     }
 
     update(keys){
-        if (keys["w"]) this.y -= this.v;
-        if (keys["s"]) this.y += this.v;
-        if (keys["a"]) this.x -= this.v;
-        if (keys["d"]) this.x += this.v;
+        if (keys["w"] && this.y - this.v > 0) this.y -= this.v;
+        if (keys["s"] && this.y + this.h + this.v < canvas.height) this.y += this.v;
+        if (keys["a"] && this.x - this.v > 0) this.x -= this.v;
+        if (keys["d"] && this.x + this.w + this.v < canvas.width) this.x += this.v;
         if (keys[" "]) {
             this.w -= 2;
             this.h -= 2;
